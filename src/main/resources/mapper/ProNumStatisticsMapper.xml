@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crcb.mapper.ProNumStatisticsMapper">
+    <insert id="addStatisticsResult" parameterType="com.crcb.entity.ProNumStatistics">
+        insert into pro_num_statistics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                id,
+            </if>
+            <if test="countNum != null and countNum != ''">
+                count_num,
+            </if>
+            <if test="sumNum !=null and sumNum != ''">
+                sum_num,
+            </if>
+            <if test="statisticsTime !=null">
+                statistics_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="countNum != null and countNum != ''">
+                #{countNum,jdbcType=INTEGER},
+            </if>
+            <if test="sumNum !=null and sumNum != ''">
+                #{sumNum,jdbcType=INTEGER},
+            </if>
+            <if test="statisticsTime != null ">
+                #{statisticsTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

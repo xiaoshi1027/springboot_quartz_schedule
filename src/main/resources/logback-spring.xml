@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration  scan="true" scanPeriod="60 seconds" debug="false">
+    <!--输出到控制台-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyy-MM-dd HH:mm:ss.SSS} %p %t - %m%n</pattern>
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--输出到文件-->
+    <appender name="DefaultAppender"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/logback-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <maxFileSize>300MB</maxFileSize>
+            <maxHistory>300</maxHistory>
+            <totalSizeCap>90GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyy-MM-dd HH:mm:ss.SSS} %p %t - %m%n</pattern>
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <logger name="com.crcb.mapper" level="DEBUG" additivity="false">
+        <appender-ref ref="console" />
+    </logger>
+
+    <root>
+        <level value="info" />
+        <appender-ref ref="console" />
+        <appender-ref ref="DefaultAppender" />
+    </root>
+
+</configuration>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crcb.mapper.ProductNumMapper">
+    <select id="countNum" resultType="com.crcb.dto.ProNumStatisticsDto">
+        SELECT count(1) as countNum,sum(pro_num) as sumNum from product_num
+    </select>
+
+    <insert id="insertNum" parameterType="com.crcb.dto.ProductNumDto" >
+        insert into product_num
+        <if test="numList !=null and numList.size() > 0">
+            (bat_no,pro_num,create_time)
+        </if>
+        values
+        <if test="numList !=null and numList.size() > 0">
+            <foreach item="item" index="index" collection="numList" separator="," >
+                (#{batNo,jdbcType=VARCHAR},#{item},#{createTime,jdbcType=TIMESTAMP})
+            </foreach>
+        </if>
+    </insert>
+</mapper>
